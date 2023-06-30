@@ -27,13 +27,13 @@ stages:
     #--------------------------------------------#  
     # Use Terraform to create the Infrastructure      
     # Install Terraform on the pipeline agent 
-    - task: TerraformInstaller@0
+    - task: TerraformInstaller@1
       displayName: 'Terrafom installation'
       inputs:
         terraformVersion: '1.2.9'
     
     # Run Terraform Init on the pipeline agent 
-    - task: TerraformTaskV3@3
+    - task: TerraformTaskV4@4
       displayName: 'Terrafom init'
       inputs:
         provider: 'azurerm'
@@ -45,7 +45,7 @@ stages:
         backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'test.terraform.tfstate'
 
-    - task: TerraformTaskV3@3
+    - task: TerraformTaskV4@4
       displayName: Terraform validate
       inputs:
         provider: 'azurerm'
@@ -68,7 +68,7 @@ stages:
 
     
     # Run Terraform Apply
-    - task: TerraformTaskV3@3
+    - task: TerraformTaskV4@4
       displayName: Terraform apply
       inputs:
         provider: 'azurerm'
@@ -77,7 +77,7 @@ stages:
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
     # Destroy the resources in Azure by running a separate pipeline. 
-    - task: TerraformTaskV3@3
+    - task: TerraformTaskV4@4
       displayName: Terraform destroy
       inputs:
         provider: 'azurerm'
