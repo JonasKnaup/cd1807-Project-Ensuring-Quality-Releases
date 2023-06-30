@@ -90,7 +90,9 @@ stages:
     - task: CmdLine@2
       displayName: Install Newman
       inputs:
-        script: 'sudo npm install -g newman'
+        script: |
+          sudo apt-get install npm
+          sudo npm install -g newman
         workingDirectory: $(System.DefaultWorkingDirectory)
     # Postman Data Validation Test Suite    
     - task: CmdLine@2
