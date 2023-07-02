@@ -40,16 +40,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://dummy.restapiexample.com/api/v1/create",
-					"protocol": "http",
+					"raw": "{{url}}/api/{{version}}/create",
 					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
+						"{{url}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"{{version}}",
 						"create"
 					]
 				}
@@ -85,13 +82,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/v1/employees",
+					"raw": "{{url}}/api/{{version}}/employees",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"{{version}}",
 						"employees"
 					]
 				}
@@ -105,8 +102,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"success\");",
+							"pm.test(\"Validate Data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.id).to.eql(pm.variables.get(\"user_id\"));",
+							"    pm.expect(jsonData.data.employee_name).to.eql(pm.variables.get(\"name\"));",
+							"    pm.expect(jsonData.data.employee_salary).to.eql(pm.variables.get(\"salary\"));",
+							"    pm.expect(jsonData.data.employee_age).to.eql(pm.variables.get(\"age\"));",
 							"});"
 						],
 						"type": "text/javascript"

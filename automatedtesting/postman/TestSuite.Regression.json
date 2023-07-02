@@ -35,16 +35,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://dummy.restapiexample.com/api/v1/create",
-					"protocol": "http",
+					"raw": "{{url}}/api/{{version}}/create",
 					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
+						"{{url}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"{{version}}",
 						"create"
 					]
 				}
@@ -71,13 +68,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/v1/employees",
+					"raw": "{{url}}/api/{{version}}/employees",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"{{version}}",
 						"employees"
 					]
 				}
