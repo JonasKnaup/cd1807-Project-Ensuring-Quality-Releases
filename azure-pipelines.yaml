@@ -176,7 +176,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: 'Azure service connection'
+              azureSubscription: 'Azure Service Connection2'
               appName: 'jk-application-AppService'          
               appType: webApp
               package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'  
