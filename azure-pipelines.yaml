@@ -225,7 +225,7 @@ stages:
                 if [ ! -d "$DIR" ]; then
                     mkdir app
                 fi
-                mv /home/devopsagent/azagent/_work/1/drop-uitests/$(Build.BuildId)-uitests.zip app
+                mv /home/devopsagent/myagent/_work/1/drop-uitests/$(Build.BuildId)-uitests.zip app
                 cd app
                 unzip -o $(Build.BuildId)-uitests.zip
                 FILE=/home/devopsagent/app/chromedriver_linux64.zip
@@ -237,7 +237,5 @@ stages:
                 fi
                 export PATH=$PATH:/home/devopsagent/app
                 echo "Starting Selenium Tests"
-                ls
-                pwd
                 python3 add_remove_from_cart.py >> selenium.log
                 echo "Completed Selenium Tests. Check selenium.log for results."
