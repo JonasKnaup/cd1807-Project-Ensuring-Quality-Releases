@@ -78,14 +78,13 @@ stages:
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
     # Destroy the resources in Azure by running a separate pipeline. 
-    - task: TerraformTaskV4@4
-      condition: eq(1,2) #todo remove
-      displayName: Terraform destroy
-      inputs:
-        provider: 'azurerm'
-        command: 'destroy'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
+    #- task: TerraformTaskV4@4
+    #  displayName: Terraform destroy
+    #  inputs:
+    #    provider: 'azurerm'
+    #    command: 'destroy'
+    #    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+    #    environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
 #--------------------------------------------#    
     # Postman - Install Newman    
@@ -178,7 +177,7 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: 'Azure service connection'
-              appName: 'My App'          
+              appName: 'jk-application-AppService'          
               appType: webApp
               package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'  
           #--------------------------------------------#    
@@ -198,7 +197,6 @@ stages:
 
   - deployment: VMDeploy
     displayName: Selenium Tests
-    dependsOn: FakeRestAPI
     environment:
       name: 'test-vm'        
       resourceType: VirtualMachine
