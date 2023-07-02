@@ -220,18 +220,21 @@ stages:
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
-                cd ~/
-                DIR=/home/devopsagent/app
-                if [ ! -d "$DIR" ]; then
-                    mkdir app
+
+                FILE=/home/devopsagent/app/chromedriver_linux64.zip
+                if [ ! -f "$FILE" ]; then
+                    LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+                    wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
+                    unzip -o chromedriver_linux64.zip
+                    sudo ln -s $PWD/chromedriver /usr/local/bin/chromedriver
                 fi
 
                 unzip -o $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-uitests.zip -d .
                 sudo mkdir -p /var/log/selenium
                 sudo chmod 664 /var/log/selenium
-                source ~/.selenium-venv/bin/activate
-                python -u logadd_remove_from_cartin.py | sudo tee -a /var/log/selenium/selenium-test.log
+                echo "Starting Selenium Tests"
+                python3 add_remove_from_cart.py >> selenium.log
+                echo "Completed Selenium Tests. Check selenium.log for results."
                 cd $(System.DefaultWorkingDirectory)
                 mkdir -p log/selenium
                 sudo cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
-                ls -la
