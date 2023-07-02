@@ -224,7 +224,15 @@ stages:
                 if [ ! -d "$DIR" ]; then
                     mkdir app
                 fi
+                echo "current directory is"
+                pwd
+                echo "current directory content"
+                ls
                 mv /home/testuser/azagent/_work/1/drop-uitests/$(Build.BuildId)-uitests.zip app
+
+                echo "current directory content"
+                ls /home/testuser/azagent/_work/1/drop-uitests/
+
                 cd app
                 unzip -o $(Build.BuildId)-uitests.zip
                 FILE=/home/testuser/app/chromedriver_linux64.zip
