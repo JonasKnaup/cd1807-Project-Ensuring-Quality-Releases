@@ -219,7 +219,9 @@ stages:
                 sudo apt-get install python3-pip -y
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
-                sudo pip3 install selenium
+                pip3 install -U selenium
+                pip install -U selenium
+                sudo apt-get install -y chromium-browser
 
                 FILE=/home/devopsagent/app/chromedriver_linux64.zip
                 if [ ! -f "$FILE" ]; then
