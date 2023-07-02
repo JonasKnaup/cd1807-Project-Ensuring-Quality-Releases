@@ -219,8 +219,7 @@ stages:
                 sudo apt-get install python3-pip -y
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
-                pip3 install -U selenium
-                pip install -U selenium
+                sudo python3 -m pip install selenium
                 sudo apt-get install -y chromium-browser
 
                 FILE=/home/devopsagent/app/chromedriver_linux64.zip
