@@ -69,7 +69,6 @@ stages:
     
     # Run Terraform Apply
     - task: TerraformTaskV4@4
-      condition: eq(1,2) #todo remove
       displayName: Terraform apply
       inputs:
         provider: 'azurerm'
