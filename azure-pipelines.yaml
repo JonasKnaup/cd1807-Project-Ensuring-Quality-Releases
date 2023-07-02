@@ -197,6 +197,7 @@ stages:
 
   - deployment: VMDeploy
     displayName: Selenium Tests
+    dependsOn: FakeRestAPI
     environment:
       name: 'test-vm'        
       resourceType: VirtualMachine
@@ -206,7 +207,7 @@ stages:
         deploy:
           steps:
           - download: current
-            artifact: drop-ui-tests   
+            artifact: drop-uitests  
             
           - task: Bash@3
             inputs:
