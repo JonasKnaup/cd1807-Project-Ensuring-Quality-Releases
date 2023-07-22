@@ -238,4 +238,4 @@ stages:
                 echo "Completed Selenium Tests. Check selenium.log for results."
                 cd $(System.DefaultWorkingDirectory)
                 mkdir -p log/selenium
-                sudo cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
+                sudo cp s/selenium.log log/selenium/selenium-test.log
