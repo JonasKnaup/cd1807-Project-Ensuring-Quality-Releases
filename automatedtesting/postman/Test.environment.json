@@ -28,7 +28,7 @@
 		},
 		{
 			"key": "id",
-			"value": "",
+			"value": "1",
 			"type": "default",
 			"enabled": true
 		},
@@ -52,6 +52,6 @@
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2023-07-22T12:34:30.043Z",
+	"_postman_exported_at": "2023-07-22T12:37:42.891Z",
 	"_postman_exported_using": "Postman/10.16.0"
 }
