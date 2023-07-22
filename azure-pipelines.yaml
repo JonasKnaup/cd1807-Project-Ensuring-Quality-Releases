@@ -191,7 +191,7 @@ stages:
                 unzip -o $(Build.BuildId)-perftests.zip
                 ./apache-jmeter-5.6.2/bin/jmeter -n -t EnduranceTest.jmx -Jresdir=ids.csv -j endurance.log -f
                 cat endurance.log
-                ./apache-jmeter-5.6.2/bin/jmeter -n -t StressTest.jmx -Jresdir=ids.csv -j stress.log -f
+                ./apache-jmeter-5.6.2/bin/jmeter -n -t Stresstest.jmx -Jresdir=ids.csv -j stress.log -f
                 cat stress.log
               workingDirectory: '$(Pipeline.Workspace)/drop-perftests'       
               
