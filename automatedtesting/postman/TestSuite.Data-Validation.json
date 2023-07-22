@@ -6,21 +6,17 @@
 	},
 	"item": [
 		{
-			"name": "Create Employee",
+			"name": "Create Product",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var json = pm.response.json();",
-							"pm.environment.set(\"id\", json.data.id);",
-							"pm.variables.set(\"user_id\", json.data.id);",
-							"",
 							"pm.test(\"Validate Data\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.data.name).to.eql(pm.variables.get(\"name\"));",
-							"    pm.expect(jsonData.data.age).to.eql(pm.variables.get(\"age\"));",
-							"    pm.expect(jsonData.data.salary).to.eql(pm.variables.get(\"salary\"));",
+							"    pm.expect(jsonData.title).to.eql(pm.variables.get(\"title\"));",
+							"    pm.expect(jsonData.price).to.eql(pm.variables.get(\"price\"));",
+							"    pm.expect(jsonData.stock).to.eql(pm.variables.get(\"stock\"));",
 							"});"
 						],
 						"type": "text/javascript"
@@ -32,7 +28,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"{{name}}\",\n    \"salary\": \"{{salary}}\",\n    \"age\": \"{{age}}\"\n}",
+					"raw": "{\n    \"title\": \"{{title}}\",\n    \"price\": \"{{price}}\",\n    \"stock\": \"{{stock}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,21 +36,20 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/{{version}}/create",
+					"raw": "{{url}}/products/add",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
-						"{{version}}",
-						"create"
+						"products",
+						"add"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get All Employees",
+			"name": "Get All Products",
 			"event": [
 				{
 					"listen": "test",
@@ -63,8 +58,8 @@
 							"var schema = {",
 							"    \"type\": \"object\",",
 							"    \"properties\": {",
-							"        \"status\"  : { \"type\": \"string\" },",
-							"        \"data\"    : { \"type\": \"array\" }",
+							"        \"total\"  : { \"type\": \"number\" },",
+							"        \"products\"    : { \"type\": \"array\" }",
 							"    }",
 							"};",
 							"",
@@ -82,32 +77,33 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/{{version}}/employees",
+					"raw": "{{url}}/products",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
-						"{{version}}",
-						"employees"
+						"products"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get Employee",
+			"name": "Get Product",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
+							"var json = pm.response.json();",
+							"pm.environment.set(\"id\", json.id);",
+							"",
 							"pm.test(\"Validate Data\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.data.id).to.eql(pm.variables.get(\"user_id\"));",
-							"    pm.expect(jsonData.data.employee_name).to.eql(pm.variables.get(\"name\"));",
-							"    pm.expect(jsonData.data.employee_salary).to.eql(pm.variables.get(\"salary\"));",
-							"    pm.expect(jsonData.data.employee_age).to.eql(pm.variables.get(\"age\"));",
+							"    pm.expect(jsonData.id).to.eql(pm.variables.get(\"id\"));",
+							"    pm.expect(jsonData.title).to.eql(pm.variables.get(\"title\"));",
+							"    pm.expect(jsonData.price).to.eql(parseInt(pm.variables.get(\"price\")));",
+							"    pm.expect(jsonData.stock).to.eql(parseInt(pm.variables.get(\"stock\")));",
 							"});"
 						],
 						"type": "text/javascript"
@@ -118,14 +114,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/{{version}}/employee/{{id}}",
+					"raw": "{{url}}/products/{{id}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
-						"{{version}}",
-						"employee",
+						"products",
 						"{{id}}"
 					]
 				},
@@ -134,7 +128,7 @@
 			"response": []
 		},
 		{
-			"name": "Update Employee",
+			"name": "Update Product",
 			"event": [
 				{
 					"listen": "test",
@@ -142,9 +136,9 @@
 						"exec": [
 							"pm.test(\"Validate Data\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.data.name).to.eql(pm.variables.get(\"new_name\"));",
-							"    pm.expect(jsonData.data.salary).to.eql(pm.variables.get(\"new_salary\"));",
-							"    pm.expect(jsonData.data.age).to.eql(pm.variables.get(\"new_age\"));",
+							"    pm.expect(jsonData.title).to.eql(pm.variables.get(\"new_title\"));",
+							"    pm.expect(jsonData.price).to.eql(pm.variables.get(\"new_price\"));",
+							"    pm.expect(jsonData.stock).to.eql(pm.variables.get(\"new_stock\"));",
 							"});"
 						],
 						"type": "text/javascript"
@@ -156,7 +150,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"{{new_name}}\",\n    \"salary\": \"{{new_salary}}\",\n    \"age\": \"{{new_age}}\"\n}",
+					"raw": "{\n    \"title\": \"{{new_title}}\",\n    \"price\": \"{{new_price}}\",\n    \"stock\": \"{{new_stock}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -164,14 +158,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/{{version}}/update/{{id}}",
+					"raw": "{{url}}/products/{{id}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
-						"{{version}}",
-						"update",
+						"products",
 						"{{id}}"
 					]
 				},
@@ -180,20 +172,15 @@
 			"response": []
 		},
 		{
-			"name": "Delete Employee",
+			"name": "Delete Product",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Validate Id\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.data).to.eql(pm.variables.get(\"id\"));",
-							"});",
-							"",
 							"pm.test(\"Validate Message\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.message).to.eql(\"Successfully! Record has been deleted\");",
+							"    pm.expect(jsonData.isDeleted).to.eql(true);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -204,20 +191,38 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/{{version}}/delete/{{id}}",
+					"raw": "{{url}}/products/{{id}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
-						"{{version}}",
-						"delete",
+						"products",
 						"{{id}}"
 					]
 				},
 				"description": "Delete an employee record"
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

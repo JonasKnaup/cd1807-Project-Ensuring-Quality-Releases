@@ -1,22 +1,20 @@
 {
 	"info": {
-		"_postman_id": "f5ff5f00-357e-4387-ac2e-8b6b011a5aa0",
+		"_postman_id": "67c212c6-7419-4908-929d-9692378c7b0b",
 		"name": "Udacity Regression Test Suit",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Create Employee",
+			"name": "Create Product",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"success\");",
-							"});",
-							"var json = pm.response.json();",
-							"pm.environment.set(\"id\", json.data.id);"
+							"    pm.expect(pm.response.code).to.eq(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -27,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"{{name}}\",\n    \"salary\": \"{{salary}}\",\n    \"age\": \"{{age}}\"\n}",
+					"raw": "{\n    \"title\": \"{{title}}\",\n    \"price\": \"{{price}}\",\n    \"stock\": \"{{stock}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -35,61 +33,27 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/{{version}}/create",
+					"raw": "{{url}}/products/add",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
-						"{{version}}",
-						"create"
+						"products",
+						"add"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get All Employees",
+			"name": "Get All Products",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"success\");",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}/api/{{version}}/employees",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"api",
-						"{{version}}",
-						"employees"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Employee",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"success\");",
+							"    pm.expect(pm.response.code).to.eq(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -100,14 +64,42 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/{{version}}/employee/{{id}}",
+					"raw": "{{url}}/products",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
-						"{{version}}",
-						"employee",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response\", function () {",
+							"    pm.expect(pm.response.code).to.eq(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/products/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products",
 						"{{id}}"
 					]
 				},
@@ -116,14 +108,14 @@
 			"response": []
 		},
 		{
-			"name": "Update Employee",
+			"name": "Update Product",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"success\");",
+							"    pm.expect(pm.response.code).to.eq(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -135,7 +127,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"{{new_name}}\",\n    \"salary\": \"{{new_salary}}\",\n    \"age\": \"{{new_age}}\"\n}",
+					"raw": "{\n    \"title\": \"{{new_title}}\",\n    \"price\": \"{{new_price}}\",\n    \"stock\": \"{{new_stock}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -143,14 +135,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/{{version}}/update/{{id}}",
+					"raw": "{{url}}/products/{{id}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
-						"{{version}}",
-						"update",
+						"products",
 						"{{id}}"
 					]
 				},
@@ -159,14 +149,14 @@
 			"response": []
 		},
 		{
-			"name": "Delete Employee",
+			"name": "Delete Product",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"success\");",
+							"    pm.expect(pm.response.code).to.eq(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -177,20 +167,38 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/{{version}}/delete/{{id}}",
+					"raw": "{{url}}/products/{{id}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
-						"{{version}}",
-						"delete",
+						"products",
 						"{{id}}"
 					]
 				},
 				"description": "Delete an employee record"
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
