@@ -70,7 +70,7 @@ stages:
     # Run Terraform Apply
     - task: TerraformTaskV4@4
       displayName: Terraform apply
-      condition: eq(1,2)
+     # condition: eq(1,2)
       inputs:
         provider: 'azurerm'
         command: 'apply'
