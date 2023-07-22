@@ -55,6 +55,7 @@ def startTests():
     chrome_options.add_argument('--disable-infobars')
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument("--remote-debugging-port=9222")
     chrome_options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(options=chrome_options)
     print('Browser started successfully. Navigating to the demo page to login.')
