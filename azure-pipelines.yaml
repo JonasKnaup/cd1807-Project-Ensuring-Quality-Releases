@@ -236,6 +236,3 @@ stages:
                 echo "Starting Selenium Tests"
                 python3 add_remove_from_cart.py >> selenium.log
                 echo "Completed Selenium Tests. Check selenium.log for results."
-                cd $(System.DefaultWorkingDirectory)
-                mkdir -p log/selenium
-                sudo cp 1/s/selenium.log log/selenium/selenium-test.log
