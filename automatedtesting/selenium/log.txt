@@ -1,0 +1,27 @@
+Starting the browser...
+Browser started successfully. Navigating to the demo page to login.
+Login attempt, user: standard_user,  password: secret_sauce
+Clicking the login button
+User successfully logged in.
+Start adding all products to cart
+Total products to add: 6
+Added Sauce Labs Backpack to cart
+Added Sauce Labs Bike Light to cart
+Added Sauce Labs Bolt T-Shirt to cart
+Added Sauce Labs Fleece Jacket to cart
+Added Sauce Labs Onesie to cart
+Added Test.allTheThings() T-Shirt (Red) to cart
+Cart badge text: 6
+Product count equals cart badge count
+Click on card button
+Asserted cart page
+All items are in the cart
+Start removing all products from cart
+Total products to remove: 6
+Removed Sauce Labs Backpack from cart
+Removed Sauce Labs Bike Light from cart
+Removed Sauce Labs Bolt T-Shirt from cart
+Removed Sauce Labs Fleece Jacket from cart
+Removed Sauce Labs Onesie from cart
+Removed Test.allTheThings() T-Shirt (Red) from cart
+All items are removed from the cart

@@ -1,0 +1,228 @@
+{
+	"info": {
+		"_postman_id": "99e81d68-5eb7-4178-a856-3e1002ed8e9d",
+		"name": "Udacity Data Validation Test Suit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate Data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql(pm.variables.get(\"title\"));",
+							"    pm.expect(jsonData.price).to.eql(pm.variables.get(\"price\"));",
+							"    pm.expect(jsonData.stock).to.eql(pm.variables.get(\"stock\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"{{title}}\",\n    \"price\": \"{{price}}\",\n    \"stock\": \"{{stock}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/products/add",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {",
+							"    \"type\": \"object\",",
+							"    \"properties\": {",
+							"        \"total\"  : { \"type\": \"number\" },",
+							"        \"products\"    : { \"type\": \"array\" }",
+							"    }",
+							"};",
+							"",
+							"pm.test('Validate schema', function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/products",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var json = pm.response.json();",
+							"pm.environment.set(\"id\", json.id);",
+							"",
+							"pm.test(\"Validate Data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(pm.variables.get(\"id\"));",
+							"    pm.expect(jsonData.title).to.eql(pm.variables.get(\"title\"));",
+							"    pm.expect(jsonData.price).to.eql(parseInt(pm.variables.get(\"price\")));",
+							"    pm.expect(jsonData.stock).to.eql(parseInt(pm.variables.get(\"stock\")));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/products/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products",
+						"{{id}}"
+					]
+				},
+				"description": "Get a single employee data"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate Data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql(pm.variables.get(\"new_title\"));",
+							"    pm.expect(jsonData.price).to.eql(pm.variables.get(\"new_price\"));",
+							"    pm.expect(jsonData.stock).to.eql(pm.variables.get(\"new_stock\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"{{new_title}}\",\n    \"price\": \"{{new_price}}\",\n    \"stock\": \"{{new_stock}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/products/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products",
+						"{{id}}"
+					]
+				},
+				"description": "Update an employee record"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate Message\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.isDeleted).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/products/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products",
+						"{{id}}"
+					]
+				},
+				"description": "Delete an employee record"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
